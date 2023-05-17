@@ -1,0 +1,13 @@
+.logo {
+    width: 6rem;
+    height: 6rem;
+    padding-right: 0px !important;
+  }
+  
+  .logo-text {
+    font-size: 2.5rem;
+    font-family: cursive;
+    color: #168463;
+    padding-left: 0px !important;
+    font-weight: bold;
+  }
