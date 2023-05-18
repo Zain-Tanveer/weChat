@@ -64,7 +64,7 @@ app.get('/weChat', (req, res) => {
 })
 
 app.get('/testRoute', (req, res) => {
-  res.send('this is a test route in for testing, changes made in development')
+  res.send('this is a test route in for testing, changes made in development!')
 })
 
 app.use('/api/v1/auth', authRouter)
