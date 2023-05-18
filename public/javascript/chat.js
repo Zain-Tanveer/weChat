@@ -1,4 +1,4 @@
-const socket = io('http://localhost:5000')
+const socket = io('https://chat-app-production-8b7b.up.railway.app/')
 
 const form = document.getElementById('send-container')
 const messageInput = document.getElementById('message-input')
