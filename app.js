@@ -63,6 +63,10 @@ app.get('/weChat', (req, res) => {
   res.render('chat')
 })
 
+app.get('/test route', (req, res) => {
+  res.send('this is a test route in development')
+})
+
 app.use('/api/v1/auth', authRouter)
 
 // socket setup
