@@ -6,6 +6,10 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>WeChat - Chat App</title>
     <link rel='icon' type='image/png' href='../uploads/chat-app-icon.png' />
+
+    <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
+    <script src='../javascript/auth.js'></script>
+
     <script defer src='http://localhost:5000/socket.io/socket.io.js'></script>
     <script defer src='../javascript/chat.js'></script>
     <link rel='stylesheet' href='../css/chat.css' />
@@ -49,7 +53,7 @@
           </div>
         </div>
       </div>
-      <form action='#' id='send-container'>
+      <form action='#' id='send-container' style='margin-bottom: 0px;'>
         <div class='input-container' id='send-container'>
           <input
             type='text'

@@ -49,7 +49,7 @@ const appendMessage = (message, name, position) => {
   messageContainer.scrollTop = messageContainer.scrollHeight
 }
 
-const username = prompt('Enter your name to join')
+// const username = prompt('Enter your name to join')
 socket.emit('new-user-joined', username)
 
 form.addEventListener('submit', (e) => {
