@@ -1,22 +1,29 @@
+// variables
 const socket = io('https://chat-app-production-8b7b.up.railway.app/')
+
+const welcomeMessageHeader = document.getElementById('welcome-message-header')
 
 const form = document.getElementById('send-container')
 const messageInput = document.getElementById('message-input')
 const messageContainer = document.querySelector('.message-container')
+
 const headerDropdown = document.getElementById('header-dropdown')
 const headerUser = document.getElementById('header-user')
 const headerUsername = document.getElementById('header-username')
 const userImage = document.getElementById('user-image')
+
+const logout = document.getElementById('logout')
 
 const user = JSON.parse(localStorage.getItem('user'))
 if (!user) {
   window.location.href = `error?message=User not found!&code=404`
 }
 
-const username = user.name
-headerUsername.innerText = username
+headerUsername.innerText = user.name
 userImage.src = user.image || 'uploads/user-icon.png'
+welcomeMessageHeader.innerText = `Welcome, ${user.name}!`
 
+// functions
 const append = (message, position) => {
   const messageElement = document.createElement('div')
   messageElement.classList.add('message')
@@ -34,36 +41,49 @@ const append = (message, position) => {
   messageContainer.scrollTop = messageContainer.scrollHeight
 }
 
-const appendMessage = (message, name, position) => {
+const appendMessage = (message, name, image, position) => {
+  const lastMessageDiv = messageContainer.lastElementChild
+
   const messageElement = document.createElement('div')
   messageElement.classList.add('message')
   messageElement.classList.add(position)
 
-  const avatarElement = document.createElement('img')
-  avatarElement.src = 'uploads/chat-app-icon.png'
-  avatarElement.alt = 'Bot Avatar'
-  avatarElement.classList.add('avatar')
-  messageElement.appendChild(avatarElement)
+  if (!lastMessageDiv.classList.contains(position)) {
+    const avatarElement = document.createElement('img')
+    avatarElement.src = image
+    avatarElement.alt = 'Bot Avatar'
+    avatarElement.classList.add('avatar')
+    messageElement.appendChild(avatarElement)
+  }
 
   const textElement = document.createElement('div')
   textElement.classList.add('text')
   messageElement.appendChild(textElement)
 
-  const senderNameElement = document.createElement('div')
-  senderNameElement.classList.add('sender-name')
-  senderNameElement.innerText = name
-  textElement.appendChild(senderNameElement)
+  if (!lastMessageDiv.classList.contains(position)) {
+    const senderNameElement = document.createElement('div')
+    senderNameElement.classList.add('sender-name')
+    senderNameElement.innerText = name
+    textElement.appendChild(senderNameElement)
+  }
 
   const contentElement = document.createTextNode(message)
   textElement.appendChild(contentElement)
+
+  if (lastMessageDiv.classList.contains(position)) {
+    if (position === 'user-message') {
+      textElement.style.marginRight = '55px'
+    } else if (position === 'bot-message') {
+      textElement.style.marginLeft = '45px'
+    }
+  }
 
   messageContainer.appendChild(messageElement)
 
   messageContainer.scrollTop = messageContainer.scrollHeight
 }
 
-socket.emit('new-user-joined', username)
-
+// event listners
 document.addEventListener('click', (e) => {
   if (!headerDropdown.contains(e.target)) {
     headerUser.classList.remove('header-user-click')
@@ -74,24 +94,39 @@ headerUser.addEventListener('click', () => {
   headerUser.classList.add('header-user-click')
 })
 
+logout.addEventListener('click', () => {
+  localStorage.removeItem('user')
+  window.location.href = 'http://localhost:5000/'
+})
+
 form.addEventListener('submit', (e) => {
   e.preventDefault()
   const message = messageInput.value
-  appendMessage(message, username, 'user-message')
+  const image = user.image || 'uploads/user-icon.png'
+  appendMessage(message, user.name, image, 'user-message')
   socket.emit('send', message)
   messageInput.value = ''
 
   messageContainer.scrollTop = messageContainer.scrollHeight
 })
 
-socket.on('user-joined', (name) => {
-  append(`${name} joined the chat!`, 'join-left-message')
+// socket configuration
+socket.emit('new-user-joined', user)
+
+socket.on('user-joined', (data) => {
+  append(`${data.name} joined the chat!`, 'join-left-message')
 })
 
-socket.on('user-left', (name) => {
-  append(`${name} left the chat!`, 'join-left-message')
+socket.on('user-left', (data) => {
+  append(`${data.name} left the chat!`, 'join-left-message')
 })
 
 socket.on('receive', (data) => {
-  appendMessage(`${data.message}`, `${data.name}`, 'bot-message')
+  const image = data.user.image || 'uploads/user-icon.png'
+  appendMessage(
+    `${data.message}`,
+    `${data.user.name}`,
+    `${image}`,
+    'bot-message'
+  )
 })

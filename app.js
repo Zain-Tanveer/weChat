@@ -66,8 +66,16 @@ app.get('/', (req, res) => {
   res.render('login')
 })
 
+app.get('/signup', (req, res) => {
+  res.render('signup')
+})
+
 app.get('/weChat', (req, res) => {
   res.render('chat')
+})
+
+app.get('/error', (req, res) => {
+  res.render('error')
 })
 
 app.use('/api/v1/auth', authRouter)
