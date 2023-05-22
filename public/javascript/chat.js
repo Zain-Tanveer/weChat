@@ -1,12 +1,16 @@
+// variables
 const socket = io('http://localhost:5000')
 
 const form = document.getElementById('send-container')
 const messageInput = document.getElementById('message-input')
 const messageContainer = document.querySelector('.message-container')
+
 const headerDropdown = document.getElementById('header-dropdown')
 const headerUser = document.getElementById('header-user')
 const headerUsername = document.getElementById('header-username')
 const userImage = document.getElementById('user-image')
+
+const logout = document.getElementById('logout')
 
 const user = JSON.parse(localStorage.getItem('user'))
 if (!user) {
@@ -17,6 +21,7 @@ const username = user.name
 headerUsername.innerText = username
 userImage.src = user.image || 'uploads/user-icon.png'
 
+// functions
 const append = (message, position) => {
   const messageElement = document.createElement('div')
   messageElement.classList.add('message')
@@ -62,8 +67,7 @@ const appendMessage = (message, name, position) => {
   messageContainer.scrollTop = messageContainer.scrollHeight
 }
 
-socket.emit('new-user-joined', username)
-
+// event listners
 document.addEventListener('click', (e) => {
   if (!headerDropdown.contains(e.target)) {
     headerUser.classList.remove('header-user-click')
@@ -73,6 +77,14 @@ document.addEventListener('click', (e) => {
 headerUser.addEventListener('click', () => {
   headerUser.classList.add('header-user-click')
 })
+
+logout.addEventListener('click', () => {
+  localStorage.removeItem('user')
+  window.location.href = 'http://localhost:5000/'
+})
+
+// socket configuration
+socket.emit('new-user-joined', username)
 
 form.addEventListener('submit', (e) => {
   e.preventDefault()
