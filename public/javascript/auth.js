@@ -1,5 +1,5 @@
 const authUser = async () => {
-  const API_URL = 'http://localhost:5000/api/v1'
+  const API_URL = 'https://chat-app-production-8b7b.up.railway.app/api/v1'
   const user = JSON.parse(localStorage.getItem('user')) || { token: '' }
   const headers = {
     Authorization: `Bearer ${user.token}`,

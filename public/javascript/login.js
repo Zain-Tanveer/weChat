@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api/v1'
+const API_URL = 'https://chat-app-production-8b7b.up.railway.app/api/v1'
 
 const loginButton = document.getElementById('loginButton')
 const signupButton = document.getElementById('signupButton')
@@ -11,12 +11,13 @@ const form = document.getElementById('loginForm')
 
 loginButton.addEventListener('click', () => {
   console.log('login event listner')
-  window.location.href = 'http://localhost:5000/'
+  window.location.href = 'https://chat-app-production-8b7b.up.railway.app/'
 })
 
 signupButton.addEventListener('click', () => {
   console.log('login event listner')
-  window.location.href = 'http://localhost:5000/signup'
+  window.location.href =
+    'https://chat-app-production-8b7b.up.railway.app/signup'
 })
 
 form.addEventListener('submit', async (e) => {
@@ -28,7 +29,8 @@ form.addEventListener('submit', async (e) => {
       loginWith: 'signin',
     })
     localStorage.setItem('user', JSON.stringify(response.data))
-    window.location.href = 'http://localhost:5000/weChat'
+    window.location.href =
+      'https://chat-app-production-8b7b.up.railway.app/weChat'
   } catch (error) {
     console.log(error)
     // console.log(error.response.data)
