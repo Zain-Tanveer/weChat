@@ -2,16 +2,16 @@ const socketio = (io) => {
   const users = {}
 
   io.on('connection', (socket) => {
-    socket.on('new-user-joined', (name) => {
-      console.log(`${name} has joined!`)
-      users[socket.id] = name
-      socket.broadcast.emit('user-joined', name)
+    socket.on('new-user-joined', (user) => {
+      console.log(`${user.name} has joined!`)
+      users[socket.id] = user
+      socket.broadcast.emit('user-joined', user)
     })
 
     socket.on('send', (message) => {
       socket.broadcast.emit('receive', {
         message: message,
-        name: users[socket.id],
+        user: users[socket.id],
       })
     })
 

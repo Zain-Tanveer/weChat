@@ -73,6 +73,18 @@ const UserSchema = new mongoose.Schema(
     token: {
       type: String,
     },
+    inbox_users: [
+      {
+        user_id: {
+          type: mongoose.Types.ObjectId,
+          required: [true, 'user id'],
+          ref: 'User',
+        },
+        last_message: {
+          type: String,
+        },
+      },
+    ],
   },
   { timestamps: true }
 )
