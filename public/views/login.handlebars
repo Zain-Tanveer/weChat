@@ -1,143 +1,105 @@
 <html lang='en'>
 
-  <head>
-    <!-- Required meta tags -->
-    <meta charset='utf-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <title>WeChat</title>
-    <link rel='icon' type='image/png' href='../uploads/chat-app-icon.png' />
-    <!-- Font Awesome -->
-    <link
-      rel='stylesheet'
-      href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
-    />
-    <!-- Google Fonts Roboto -->
-    <link
-      rel='stylesheet'
-      href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap'
-    />
-    <!-- MDB -->
-    <link rel='stylesheet' href='../css/mdb.min.css' />
-    <link rel='stylesheet' href='../css/login.css' />
-    <script
-      defer
-      type='text/javascript'
-      src='../javascript/mdb.min.js'
-    ></script>
-  </head>
+<head>
+  <!-- Required meta tags -->
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <title>WeChat</title>
+  <link rel='icon' type='image/png' href='../uploads/chat-app-icon.png' />
+  <!-- Font Awesome -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css' />
+  <!-- Google Fonts Roboto -->
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap' />
+  <!-- MDB -->
+  <link rel='stylesheet' href='../css/mdb.min.css' />
+  <link rel='stylesheet' href='../css/login.css' />
+  <script defer src='../javascript/login.js'></script>
+  <script defer src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
+  <script defer type='text/javascript' src='../javascript/mdb.min.js'></script>
+</head>
 
-  <body>
-    <header>
-      <!-- Navbar -->
-      <nav class='navbar navbar-expand-lg navbar-light bg-light'>
-        <!-- Container wrapper -->
-        <div class='container'>
-          <!-- Navbar brand -->
-          <a class='navbar-brand me-2' href='http://localhost:5000/weChat'>
-            <img
-              src='./uploads/chat-app-icon.png'
-              height='16'
-              alt='MDB Logo'
-              loading='lazy'
-              style='margin-top: -1px;'
-              class='logo'
-            />
-            <h1 class='logo-text'>WeChat</h1>
-          </a>
-
-          <!-- Toggle button -->
-          <button
-            class='navbar-toggler'
-            type='button'
-            data-mdb-toggle='collapse'
-            data-mdb-target='#navbarButtonsExample'
-            aria-controls='navbarButtonsExample'
-            aria-expanded='false'
-            aria-label='Toggle navigation'
-          >
-            <i class='fas fa-bars'></i>
-          </button>
-
-          <!-- Collapsible wrapper -->
-          <div class='collapse navbar-collapse' id='navbarButtonsExample'>
-            <!-- Left links -->
-            <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
-              <li class='nav-item'>
-                <a class='nav-link' href='#'></a>
-              </li>
-            </ul>
-            <!-- Left links -->
-
-            <div class='d-flex align-items-center'>
-              <button
-                type='button'
-                class='btn btn-link px-3 me-2'
-                style='color: #168463;'
-              >
-                Login
-              </button>
-              <button
-                type='button'
-                class='btn btn-primary me-3'
-                style='background: #168463;'
-              >
-                Sign up for free
-              </button>
-            </div>
-          </div>
-          <!-- Collapsible wrapper -->
-        </div>
-        <!-- Container wrapper -->
-      </nav>
-      <!-- Navbar -->
-    </header>
-
-    <div class='d-flex align-items-center h-100'>
+<body>
+  <header>
+    <!-- Navbar -->
+    <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+      <!-- Container wrapper -->
       <div class='container'>
-        <div class='row justify-content-center'>
-          <div class='col-xl-5 col-md-8'>
-            <form class='bg-white rounded shadow-5-strong p-5'>
-              <h1
-                class='mb-4 text-center fs-1 fw-bold'
-                style='color: #168463;font-family: cursive;'
-              >Login
-              </h1>
-              <!-- Email input -->
-              <div class='form-outline mb-4'>
-                <input type='email' id='form1Example1' class='form-control' />
-                <label class='form-label' for='form1Example1'>Email address</label>
-              </div>
+        <!-- Navbar brand -->
+        <a class='navbar-brand me-2' href='http://localhost:5000/'>
+          <img src='./uploads/chat-app-icon.png' height='16' alt='MDB Logo' loading='lazy' style='margin-top: -1px;'
+            class='logo' />
+          <h1 class='logo-text'>WeChat</h1>
+        </a>
 
-              <!-- Password input -->
-              <div class='form-outline mb-4'>
-                <input
-                  type='password'
-                  id='form1Example2'
-                  class='form-control'
-                />
-                <label class='form-label' for='form1Example2'>Password</label>
-              </div>
+        <!-- Toggle button -->
+        <button class='navbar-toggler' type='button' data-mdb-toggle='collapse' data-mdb-target='#navbarButtonsExample'
+          aria-controls='navbarButtonsExample' aria-expanded='false' aria-label='Toggle navigation'>
+          <i class='fas fa-bars'></i>
+        </button>
 
-              <!-- 2 column grid layout for inline styling -->
-              <div class='row mb-4'>
-                <div class='col text-center text-lg-end'>
-                  <!-- Simple link -->
-                  <a href='#!' style='color: #168463;'>Forgot password?</a>
-                </div>
-              </div>
+        <!-- Collapsible wrapper -->
+        <div class='collapse navbar-collapse' id='navbarButtonsExample'>
+          <!-- Left links -->
+          <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
+            <li class='nav-item'>
+              <a class='nav-link' href='#'></a>
+            </li>
+          </ul>
+          <!-- Left links -->
 
-              <!-- Submit button -->
-              <button
-                type='submit'
-                class='btn btn-primary btn-block'
-                style='background: #168463;'
-              >Sign in</button>
-            </form>
+          <div class='d-flex align-items-center justify-content-center'>
+            <button type='button' class='btn btn-link px-3 me-2' style='color: #168463;' name='login' id='loginButton'>
+              Login
+            </button>
+            <button type='button' class='btn btn-primary me-3' style='background: #168463;' name='signup'
+              id='signupButton'>
+              Sign up for free
+            </button>
           </div>
+        </div>
+        <!-- Collapsible wrapper -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+  </header>
+
+  <div class='d-flex align-items-center'>
+    <div class='container' style='margin-top: 5rem; margin-bottom:7rem;'>
+      <div class='row justify-content-center'>
+        <div class='col-xl-5 col-md-8'>
+          <form class='bg-white rounded shadow-5-strong p-5' id='loginForm'>
+            <h1 class='mb-4 text-center fs-1 fw-bold' style='color: #168463;font-family: cursive;'>Login
+            </h1>
+            <!-- Email input -->
+            <div class='form-outline mb-4'>
+              <input type='email' name='email' id='email' class='form-control' />
+              <label class='form-label' for='email'>Email address</label>
+            </div>
+
+            <!-- Password input -->
+            <div class='form-outline mb-4'>
+              <input type='password' id='password' name='password' class='form-control' />
+              <label class='form-label' for='password'>Password</label>
+            </div>
+
+            <!-- 2 column grid layout for inline styling -->
+            <div class='row mb-4'>
+              <div class='col text-center text-lg-end'>
+                <!-- Simple link -->
+                <a href='#!' style='color: #168463;' id='forgotPassword'>Forgot password?</a>
+              </div>
+            </div>
+
+            <!-- Submit button -->
+            <button type='submit' id='submitButton' class='btn btn-primary btn-block' style='background: #168463;'>Sign
+              in</button>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
-  </body>
+</body>
 
 </html>

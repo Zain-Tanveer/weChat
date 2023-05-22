@@ -3,6 +3,19 @@ const socket = io('http://localhost:5000')
 const form = document.getElementById('send-container')
 const messageInput = document.getElementById('message-input')
 const messageContainer = document.querySelector('.message-container')
+const headerDropdown = document.getElementById('header-dropdown')
+const headerUser = document.getElementById('header-user')
+const headerUsername = document.getElementById('header-username')
+const userImage = document.getElementById('user-image')
+
+const user = JSON.parse(localStorage.getItem('user'))
+if (!user) {
+  window.location.href = `error?message=User not found!&code=404`
+}
+
+const username = user.name
+headerUsername.innerText = username
+userImage.src = user.image || 'uploads/user-icon.png'
 
 const append = (message, position) => {
   const messageElement = document.createElement('div')
@@ -49,8 +62,17 @@ const appendMessage = (message, name, position) => {
   messageContainer.scrollTop = messageContainer.scrollHeight
 }
 
-const username = prompt('Enter your name to join')
 socket.emit('new-user-joined', username)
+
+document.addEventListener('click', (e) => {
+  if (!headerDropdown.contains(e.target)) {
+    headerUser.classList.remove('header-user-click')
+  }
+})
+
+headerUser.addEventListener('click', () => {
+  headerUser.classList.add('header-user-click')
+})
 
 form.addEventListener('submit', (e) => {
   e.preventDefault()

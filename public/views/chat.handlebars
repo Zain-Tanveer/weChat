@@ -1,66 +1,90 @@
 <html lang='en'>
 
-  <head>
-    <meta charset='UTF-8' />
-    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <title>WeChat - Chat App</title>
-    <link rel='icon' type='image/png' href='../uploads/chat-app-icon.png' />
-    <script defer src='http://localhost:5000/socket.io/socket.io.js'></script>
-    <script defer src='../javascript/chat.js'></script>
-    <link rel='stylesheet' href='../css/chat.css' />
-  </head>
+<head>
+  <meta charset='UTF-8' />
+  <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <title>WeChat - Chat App</title>
+  <link rel='icon' type='image/png' href='../uploads/chat-app-icon.png' />
+  <!-- Font Awesome -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css' />
+  <!-- Google Fonts Roboto -->
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap' />
 
-  <body>
-    <div class='chat-container'>
-      <div class='chat-header'>
-        <a href='http://localhost:5000/' class='header-anchor'>
-          <div class='image-logo'>
-            <img src='uploads/chat-app-icon.png' alt='' class='logo' />
-            <h1 class='logo-text'>WeChat</h1>
-          </div>
-        </a>
-        <div class='header-user'>
-          <h4 class='header-username'>Zain Tanveer</h4>
-          <img src='uploads/zain.jpg' alt='' class='logo' />
+  <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
+  <script src='../javascript/auth.js'></script>
+
+  <script defer src='http://localhost:5000/socket.io/socket.io.js'></script>
+  <script defer src='../javascript/chat.js'></script>
+  <script defer src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
+  <!-- MDB -->
+  <link rel='stylesheet' href='../css/mdb.min.css' />
+  <script defer type='text/javascript' src='../javascript/mdb.min.js'></script>
+  <!-- MDB -->
+  <link rel='stylesheet' href='../css/chat.css' />
+</head>
+
+<body>
+  <div class='chat-container'>
+    <div class='chat-header navbar navbar-expand-lg'>
+      <a href='http://localhost:5000/weChat' class='header-anchor'>
+        <div class='image-logo navbar-brand'>
+          <img src='uploads/chat-app-icon.png' alt='' class='logo' />
+          <h1 class='logo-text'>WeChat</h1>
         </div>
+      </a>
+
+      <!-- Toggle button -->
+      <button class='navbar-toggler' type='button' data-mdb-toggle='collapse' data-mdb-target='#navbarButtonsExample'
+        aria-controls='navbarButtonsExample' aria-expanded='false' aria-label='Toggle navigation'>
+        <i class='fas fa-bars'></i>
+      </button>
+
+      <!-- Collapsible wrapper -->
+      <div class='collapse navbar-collapse' id='navbarButtonsExample' style='justify-content:end;'>
+        <div class='dropdown' id='header-dropdown'>
+          <a href='' data-mdb-toggle='dropdown' data-mdb-display='static' aria-expanded='false'>
+            <div class='header-user ripple hover-shadow' id='header-user'>
+              <h4 class='header-username' id='header-username'></h4>
+              <img src='' alt='' class='logo' id='user-image' />
+            </div>
+          </a>
+
+          <ul class='dropdown-menu dropdown-menu-lg-end' aria-labelledby='dropdownMenuLink'>
+            <li><a class='dropdown-item' href='#' id='user-profile'>User Profile</a></li>
+            <li><a class='dropdown-item' href='#' id='profile-settings'>Profile Settings</a></li>
+            <li><a class='dropdown-item' href='#' id='logout'>Logout</a></li>
+          </ul>
+
+        </div>
+
       </div>
-      <div class='message-container'>
-        <div class='message bot-message'>
-          <img
-            src='uploads/chat-app-icon.png'
-            alt='Bot Avatar'
-            class='avatar'
-          />
-          <div class='text'>
-            <div class='sender-name'>Bot</div>
-            Hello, how can I assist you today?
-          </div>
-        </div>
-        <div class='message user-message'>
-          <img
-            src='uploads/chat-app-icon.png'
-            alt='User Avatar'
-            class='avatar'
-          />
-          <div class='text'>
-            <div class='sender-name'>User</div>
-            I need help with my account.
-          </div>
-        </div>
-      </div>
-      <form action='#' id='send-container'>
-        <div class='input-container' id='send-container'>
-          <input
-            type='text'
-            id='message-input'
-            name='message-input'
-            placeholder='Type your message'
-          />
-          <input type='submit' id='send-button' value='Send' />
-        </div>
-      </form>
+      <!-- Collapsible wrapper -->
+
     </div>
-  </body>
+    <div class='message-container'>
+      <div class='message bot-message'>
+        <img src='uploads/chat-app-icon.png' alt='Bot Avatar' class='avatar' />
+        <div class='text'>
+          <div class='sender-name'>Bot</div>
+          Hello, how can I assist you today?
+        </div>
+      </div>
+      <div class='message user-message'>
+        <img src='uploads/chat-app-icon.png' alt='User Avatar' class='avatar' />
+        <div class='text'>
+          <div class='sender-name'>User</div>
+          I need help with my account.
+        </div>
+      </div>
+    </div>
+    <form action='#' id='send-container' style='margin-bottom: 0px;'>
+      <div class='input-container' id='send-container'>
+        <input type='text' id='message-input' name='message-input' placeholder='Type your message' />
+        <input type='submit' id='send-button' value='Send' />
+      </div>
+    </form>
+  </div>
+</body>
 
 </html>

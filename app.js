@@ -22,8 +22,15 @@ const io = require('socket.io')(http)
 // database import
 const mongoose = require('mongoose')
 
+// socket middleware import
+const socketio = require('./middlewares/socket')
+
 // router imports
 const authRouter = require('./routes/auth.route')
+const userRouter = require('./routes/user.route')
+
+// authenticate middleware import
+const authMiddleware = require('./middlewares/authenticate')
 
 // error middleware imports
 const NotFoundMiddleware = require('./middlewares/not-found')
@@ -31,15 +38,15 @@ const ErrorHandlerMiddleware = require('./middlewares/error-handler')
 
 // security middlewares
 app.set('trust proxy', 1)
-app.use(
-  rateLimiter({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-  })
-)
-app.use(helmet())
-app.use(cors())
-app.use(xss())
+// app.use(
+//   rateLimiter({
+//     windowMs: 15 * 60 * 1000, // 15 minutes
+//     max: 100, // limit each IP to 100 requests per windowMs
+//   })
+// )
+// app.use(helmet())
+// app.use(cors())
+// app.use(xss())
 
 // middlewares
 app.use(express.json())
@@ -63,34 +70,10 @@ app.get('/weChat', (req, res) => {
   res.render('chat')
 })
 
-app.get('/testRoute', (req, res) => {
-  res.send('this is a test route in testing')
-})
-
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/user', authMiddleware, userRouter)
 
-// socket setup
-const users = {}
-
-io.on('connection', (socket) => {
-  socket.on('new-user-joined', (name) => {
-    console.log(`${name} has joined!`)
-    users[socket.id] = name
-    socket.broadcast.emit('user-joined', name)
-  })
-
-  socket.on('send', (message) => {
-    socket.broadcast.emit('receive', {
-      message: message,
-      name: users[socket.id],
-    })
-  })
-
-  socket.on('disconnect', () => {
-    socket.broadcast.emit('user-left', users[socket.id])
-    delete users[socket.id]
-  })
-})
+socketio(io)
 
 // error middlewares
 app.use(NotFoundMiddleware)
