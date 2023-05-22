@@ -30,9 +30,26 @@ form.addEventListener('submit', async (e) => {
     localStorage.setItem('user', JSON.stringify(response.data))
     window.location.href = 'http://localhost:5000/weChat'
   } catch (error) {
-    console.log(error)
-    // console.log(error.response.data)
-  }
+    const alertContainer = document.getElementById('alertContainer')
+    var alertDiv = document.createElement('div')
+    alertDiv.className =
+      'alert alert-danger alert-dismissible fade show alertContainerDiv'
+    alertDiv.innerHTML = `${error.response.data.msg}`
 
-  console.log(`email: ${email.value}, password: ${password.value}`)
+    var closeButton = document.createElement('button')
+    closeButton.type = 'button'
+    closeButton.className = 'btn-close alertClose'
+    closeButton.setAttribute('data-bs-dismiss', 'alert')
+
+    alertDiv.appendChild(closeButton)
+    alertContainer.appendChild(alertDiv)
+
+    closeButton.addEventListener('click', () => {
+      alertDiv.remove()
+    })
+
+    setTimeout(() => {
+      alertDiv.remove()
+    }, 5000)
+  }
 })
