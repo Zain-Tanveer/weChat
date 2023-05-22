@@ -41,6 +41,13 @@ exports.register = async (data) => {
 exports.login = async (data) => {
   const { email, password, loginWith } = data
 
+  if (!email) {
+    throw new BadRequestError('please provide an email')
+  }
+  if (!loginWith) {
+    throw new BadRequestError('please provide loginWith')
+  }
+
   const user = await User.findOne({ email, loginWith }).select(
     '-__v -role -loginWith'
   )
