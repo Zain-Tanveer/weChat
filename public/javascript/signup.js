@@ -2,13 +2,15 @@ const API_URL = 'http://localhost:5000/api/v1'
 
 const loginButton = document.getElementById('loginButton')
 const signupButton = document.getElementById('signupButton')
-const registerButton = document.getElementById('register')
+const signinButton = document.getElementById('login')
 
+const firstName = document.getElementById('firstName')
+const lastName = document.getElementById('lastName')
 const email = document.getElementById('email')
 const password = document.getElementById('password')
 const forgotPassword = document.getElementById('forgotPassword')
 
-const form = document.getElementById('loginForm')
+const form = document.getElementById('signupForm')
 
 loginButton.addEventListener('click', () => {
   window.location.href = 'http://localhost:5000/'
@@ -18,14 +20,16 @@ signupButton.addEventListener('click', () => {
   window.location.href = 'http://localhost:5000/signup'
 })
 
-registerButton.addEventListener('click', () => {
-  window.location.href = 'http://localhost:5000/signup'
+signinButton.addEventListener('click', () => {
+  window.location.href = 'http://localhost:5000/'
 })
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault()
   try {
-    const response = await axios.post(`${API_URL}/auth/login`, {
+    const response = await axios.post(`${API_URL}/auth/register`, {
+      firstName: firstName.value,
+      lastName: lastName.value,
       email: email.value,
       password: password.value,
       loginWith: 'signin',
