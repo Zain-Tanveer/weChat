@@ -75,14 +75,9 @@ const UserSchema = new mongoose.Schema(
     },
     inbox_users: [
       {
-        user_id: {
-          type: mongoose.Types.ObjectId,
-          required: [true, 'user id'],
-          ref: 'User',
-        },
-        last_message: {
-          type: String,
-        },
+        type: mongoose.Types.ObjectId,
+        required: [true, 'inbox id'],
+        ref: 'Inbox',
       },
     ],
   },
@@ -99,6 +94,7 @@ UserSchema.methods.createJWT = function () {
       user_id: this._id,
       name: this.name,
       email: this.email,
+      role: this.role,
     },
     process.env.JWT_SECRET,
     {

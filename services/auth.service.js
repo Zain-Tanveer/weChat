@@ -48,9 +48,7 @@ exports.login = async (data) => {
     throw new BadRequestError('please provide loginWith')
   }
 
-  const user = await User.findOne({ email, loginWith }).select(
-    '-__v -role -loginWith'
-  )
+  const user = await User.findOne({ email, loginWith })
   if (!user) {
     throw new NotFoundError('user does not exist')
   }
@@ -60,6 +58,8 @@ exports.login = async (data) => {
 
   data = user.toObject()
   delete data.password
+  delete data.__v
+  delete data.role
 
   if (loginWith !== 'signin') {
     return data

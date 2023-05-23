@@ -27,10 +27,15 @@ const socketio = require('./middlewares/socket')
 
 // router imports
 const authRouter = require('./routes/auth.route')
+const adminRouter = require('./routes/admin.route')
 const userRouter = require('./routes/user.route')
+const inboxRouter = require('./routes/inbox.route')
 
 // authenticate middleware import
-const authMiddleware = require('./middlewares/authenticate')
+const {
+  authenticateUser,
+  authenticateAdmin,
+} = require('./middlewares/authenticate')
 
 // error middleware imports
 const NotFoundMiddleware = require('./middlewares/not-found')
@@ -79,7 +84,9 @@ app.get('/error', (req, res) => {
 })
 
 app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/user', authMiddleware, userRouter)
+app.use('/api/v1/admin', authenticateAdmin, adminRouter)
+app.use('/api/v1/user', authenticateUser, userRouter)
+app.use('/api/v1/inbox', authenticateUser, inboxRouter)
 
 socketio(io)
 
