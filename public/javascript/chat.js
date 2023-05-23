@@ -1,8 +1,6 @@
 // variables
 const socket = io('http://localhost:5000')
 
-const welcomeMessageHeader = document.getElementById('welcome-message-header')
-
 const form = document.getElementById('send-container')
 const messageInput = document.getElementById('message-input')
 const messageContainer = document.querySelector('.message-container')
@@ -21,7 +19,6 @@ if (!user) {
 
 headerUsername.innerText = user.name
 userImage.src = user.image || 'uploads/user-icon.png'
-welcomeMessageHeader.innerText = `Welcome, ${user.name}!`
 
 // functions
 const append = (message, position) => {
@@ -41,46 +38,28 @@ const append = (message, position) => {
   messageContainer.scrollTop = messageContainer.scrollHeight
 }
 
-const appendMessage = (message, name, image, position) => {
-  const lastMessageDiv = messageContainer.lastElementChild
-
+const appendMessage = (message, position) => {
   const messageElement = document.createElement('div')
   messageElement.classList.add('message')
   messageElement.classList.add(position)
-
-  if (!lastMessageDiv.classList.contains(position)) {
-    const avatarElement = document.createElement('img')
-    avatarElement.src = image
-    avatarElement.alt = 'Bot Avatar'
-    avatarElement.classList.add('avatar')
-    messageElement.appendChild(avatarElement)
-  }
 
   const textElement = document.createElement('div')
   textElement.classList.add('text')
   messageElement.appendChild(textElement)
 
-  if (!lastMessageDiv.classList.contains(position)) {
-    const senderNameElement = document.createElement('div')
-    senderNameElement.classList.add('sender-name')
-    senderNameElement.innerText = name
-    textElement.appendChild(senderNameElement)
-  }
-
   const contentElement = document.createTextNode(message)
   textElement.appendChild(contentElement)
-
-  if (lastMessageDiv.classList.contains(position)) {
-    if (position === 'user-message') {
-      textElement.style.marginRight = '55px'
-    } else if (position === 'bot-message') {
-      textElement.style.marginLeft = '45px'
-    }
-  }
 
   messageContainer.appendChild(messageElement)
 
   messageContainer.scrollTop = messageContainer.scrollHeight
+}
+
+// pre loading data
+if (user.inbox_users && user.inbox_users.length > 0) {
+  user.inbox_users.forEach((ibx_user) => {
+    appendMessage('test message', 'bot-message')
+  })
 }
 
 // event listners
@@ -102,8 +81,7 @@ logout.addEventListener('click', () => {
 form.addEventListener('submit', (e) => {
   e.preventDefault()
   const message = messageInput.value
-  const image = user.image || 'uploads/user-icon.png'
-  appendMessage(message, user.name, image, 'user-message')
+  appendMessage(message, 'user-message')
   socket.emit('send', message)
   messageInput.value = ''
 
@@ -122,11 +100,5 @@ socket.on('user-left', (data) => {
 })
 
 socket.on('receive', (data) => {
-  const image = data.user.image || 'uploads/user-icon.png'
-  appendMessage(
-    `${data.message}`,
-    `${data.user.name}`,
-    `${image}`,
-    'bot-message'
-  )
+  appendMessage(`${data.message}`, 'bot-message')
 })

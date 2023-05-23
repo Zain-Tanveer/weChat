@@ -25,54 +25,111 @@
 </head>
 
 <body>
-  <div class='chat-container'>
-    <div class='chat-header navbar navbar-expand-lg'>
-      <a href='http://localhost:5000/weChat' class='header-anchor'>
-        <div class='image-logo navbar-brand'>
-          <img src='uploads/chat-app-icon.png' alt='' class='logo' />
+  <header>
+    <!-- Navbar -->
+    <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+      <!-- Container wrapper -->
+      <div class='container'>
+        <!-- Navbar brand -->
+        <a class='navbar-brand me-2' href='http://localhost:5000/'>
+          <img src='./uploads/chat-app-icon.png' height='16' alt='MDB Logo' loading='lazy' style='margin-top: -1px;'
+            class='logo' />
           <h1 class='logo-text'>WeChat</h1>
+        </a>
+
+        <!-- Toggle button -->
+        <button class='navbar-toggler' type='button' data-mdb-toggle='collapse' data-mdb-target='#navbarButtonsExample'
+          aria-controls='navbarButtonsExample' aria-expanded='false' aria-label='Toggle navigation'>
+          <i class='fas fa-bars'></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class='collapse navbar-collapse' id='navbarButtonsExample' style='justify-content:end;'>
+          <div class='dropdown' id='header-dropdown'>
+            <a href='' data-mdb-toggle='dropdown' data-mdb-display='static' aria-expanded='false'>
+              <div class='header-user ripple hover-shadow' id='header-user'>
+                <h4 class='header-username' id='header-username'></h4>
+                <img src='' alt='' class='logo' id='user-image' />
+              </div>
+            </a>
+            <ul class='dropdown-menu dropdown-menu-lg-end' aria-labelledby='dropdownMenuLink'>
+              <li><a class='dropdown-item' href='#' id='user-profile'>User Profile</a></li>
+              <li><a class='dropdown-item' href='#' id='profile-settings'>Profile Settings</a></li>
+              <li><a class='dropdown-item' href='#' id='logout'>Logout</a></li>
+            </ul>
+          </div>
         </div>
-      </a>
+        <!-- Collapsible wrapper -->
 
-      <!-- Toggle button -->
-      <button class='navbar-toggler' type='button' data-mdb-toggle='collapse' data-mdb-target='#navbarButtonsExample'
-        aria-controls='navbarButtonsExample' aria-expanded='false' aria-label='Toggle navigation'>
-        <i class='fas fa-bars'></i>
-      </button>
-
-      <!-- Collapsible wrapper -->
-      <div class='collapse navbar-collapse' id='navbarButtonsExample' style='justify-content:end;'>
-        <div class='dropdown' id='header-dropdown'>
-          <a href='' data-mdb-toggle='dropdown' data-mdb-display='static' aria-expanded='false'>
-            <div class='header-user ripple hover-shadow' id='header-user'>
-              <h4 class='header-username' id='header-username'></h4>
-              <img src='' alt='' class='logo' id='user-image' />
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+  </header>
+  <div class="content-container">
+    <div id="alertContainer" class="alert-container"></div>
+    <div class="body-container">
+      <div class="inbox-container">
+        <!-- Navbar -->
+        <ul class="nav nav-tabs nav-justified" id="sidebar-navbar" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="chats-link" data-mdb-toggle="tab" href="#chats" role="tab"
+              aria-controls="chats" aria-selected="true">Chats</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="groups-link" data-mdb-toggle="tab" href="#groups" role="tab" aria-controls="groups"
+              aria-selected="false">Groups</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="add-chat-link" data-mdb-toggle="tab" href="#add-chat" role="tab"
+              aria-controls="add-chat" aria-selected="false">Add Chat</a>
+          </li>
+        </ul>
+        <!-- Navbar -->
+        <!-- Tabs content -->
+        <div class="tab-content" id="sidebar-tab-content">
+          <div class="tab-pane fade show active" id="chats" role="tabpanel" aria-labelledby="chats-link">
+            <div class="inbox-user-container">
+              <img src="../uploads/zain.jpg" alt="User Image" class="inbox-user-image">
+              <div class="inbox-user-details">
+                <h4 class="inbox-user-name">John Doe</h4>
+                <p class="inbox-user-message">Hi there! How are you?</p>
+              </div>
             </div>
-          </a>
-
-          <ul class='dropdown-menu dropdown-menu-lg-end' aria-labelledby='dropdownMenuLink'>
-            <li><a class='dropdown-item' href='#' id='user-profile'>User Profile</a></li>
-            <li><a class='dropdown-item' href='#' id='profile-settings'>Profile Settings</a></li>
-            <li><a class='dropdown-item' href='#' id='logout'>Logout</a></li>
-          </ul>
-
+            <div class="inbox-user-container">
+              <img src="../uploads/zain.jpg" alt="User Image" class="inbox-user-image">
+              <div class="inbox-user-details">
+                <h4 class="inbox-user-name">John Doe</h4>
+                <p class="inbox-user-message">Hi there! How are you?</p>
+              </div>
+            </div>
+            <div class="inbox-user-container">
+              <img src="../uploads/zain.jpg" alt="User Image" class="inbox-user-image">
+              <div class="inbox-user-details">
+                <h4 class="inbox-user-name">John Doe</h4>
+                <p class="inbox-user-message">Hi there! How are you?</p>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="groups" role="tabpanel" aria-labelledby="groups-link">
+          </div>
+          <div class="tab-pane fade" id="add-chat" role="tabpanel" aria-labelledby="add-chat-link">
+          </div>
         </div>
+        <!-- Tabs content -->
 
       </div>
-      <!-- Collapsible wrapper -->
-
-    </div>
-    <div class='message-container'>
-      <div class="welcome-message">
-        <h1 id="welcome-message-header"></h1>
+      <div class='chat-container'>
+        <div class='message-container'>
+        </div>
+        <form action='#' id='send-container' style='margin-bottom: 0px;'>
+          <div class='input-container' id='send-container'>
+            <input type='text' id='message-input' name='message-input' placeholder='Type your message' />
+            <input type='submit' id='send-button' value='Send' />
+          </div>
+        </form>
       </div>
     </div>
-    <form action='#' id='send-container' style='margin-bottom: 0px;'>
-      <div class='input-container' id='send-container'>
-        <input type='text' id='message-input' name='message-input' placeholder='Type your message' />
-        <input type='submit' id='send-button' value='Send' />
-      </div>
-    </form>
   </div>
 </body>
 

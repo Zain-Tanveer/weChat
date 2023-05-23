@@ -48,7 +48,9 @@ exports.login = async (data) => {
     throw new BadRequestError('please provide loginWith')
   }
 
-  const user = await User.findOne({ email, loginWith })
+  const user = await User.findOne({ email, loginWith }).populate({
+    path: 'inbox_users',
+  })
   if (!user) {
     throw new NotFoundError('user does not exist')
   }
