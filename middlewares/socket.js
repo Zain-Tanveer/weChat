@@ -17,7 +17,7 @@ const socketio = (io) => {
 
     socket.on('disconnect', () => {
       socket.broadcast.emit('user-left', users[socket.id])
-      console.log(`${users[socket.id].name} left the chat!`)
+      console.log(`${users[socket.id]} left the chat!`)
       delete users[socket.id]
     })
   })
