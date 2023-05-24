@@ -39,6 +39,8 @@ const append = (message, position) => {
 }
 
 const appendMessage = (message, position) => {
+  const lastMessageDiv = messageContainer.lastElementChild
+
   const messageElement = document.createElement('div')
   messageElement.classList.add('message')
   messageElement.classList.add(position)
@@ -50,17 +52,31 @@ const appendMessage = (message, position) => {
   const contentElement = document.createTextNode(message)
   textElement.appendChild(contentElement)
 
+  if (position === 'user-message') {
+    textElement.style.marginRight = '55px'
+  } else if (position === 'bot-message') {
+    textElement.style.marginLeft = '45px'
+  }
+
+  if (lastMessageDiv && !lastMessageDiv.classList.contains(position)) {
+    if (position === 'user-message') {
+      textElement.classList.add('first-message-right')
+    } else if (position === 'bot-message') {
+      textElement.classList.add('first-message-left')
+    }
+  }
+
   messageContainer.appendChild(messageElement)
 
   messageContainer.scrollTop = messageContainer.scrollHeight
 }
 
 // pre loading data
-if (user.inbox_users && user.inbox_users.length > 0) {
-  user.inbox_users.forEach((ibx_user) => {
-    appendMessage('test message', 'bot-message')
-  })
-}
+// if (user.inbox_users && user.inbox_users.length > 0) {
+//   user.inbox_users.forEach((ibx_user) => {
+//     appendMessage('test message', 'bot-message')
+//   })
+// }
 
 // event listners
 document.addEventListener('click', (e) => {
