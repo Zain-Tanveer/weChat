@@ -11,13 +11,20 @@ The main focus of this app was to implement socket.io so I decided to create a c
 ## Features
 
 - Register a new user
-  ![Register Page Screenshot](https://media.discordapp.net/attachments/1208004170867539988/1208005347722395698/Screenshot_2024-02-16_160146.png?ex=65e1b5a6&is=65cf40a6&hm=ca44ab863b96b1e8bb49504483917b9c147a9d22bd2c3e960ebf82dc048fa5b9&=&format=webp&quality=lossless&width=1232&height=593)
+
+  ![Register Page Screenshot][register]
+
 - User Login
-  ![Login Page Screenshot](https://media.discordapp.net/attachments/1208004170867539988/1208004338937630790/Screenshot_2024-02-16_155740.png?ex=65e1b4b6&is=65cf3fb6&hm=42520fa00c4294308c28c9257ee940d861beef3bedbf4d0b5965eeb4e79b3c14&=&format=webp&quality=lossless&width=1237&height=593)
+
+  ![Login Page Screenshot][login]
+
 - Universal Chat Room
-  ![Chat Room Page Screenshot](https://media.discordapp.net/attachments/1208004170867539988/1208006263292825660/Screenshot_2024-02-16_160521.png?ex=65e1b680&is=65cf4180&hm=6175597391fa830fb3ec5d53b724bf409f3bf47d7eb1d796539ad007b99858cb&=&format=webp&quality=lossless&width=1257&height=593)
+
+  ![Chat Room Page Screenshot][chatroom]
+
 - Logout
-  ![Logout Button Screenshot](https://media.discordapp.net/attachments/1208004170867539988/1208008884938080286/Screenshot_2024-02-16_161552.png?ex=65e1b8f1&is=65cf43f1&hm=1c60e292964f046ceef48a423e21acf86375e7830992b866aed520d82da12aaf&=&format=webp&quality=lossless&width=1250&height=593)
+
+  ![Logout Button Screenshot][logout]
 
 ## Installation
 
@@ -41,7 +48,7 @@ Only the `JWT_SECRET` and `MONGO_URI` need to be populated.
 **Step3**:Chat away!
 
 This is how it should look!
-![App Working Screenshot](https://media.discordapp.net/attachments/1208004170867539988/1208013484131098704/image.png?ex=65e1bd3a&is=65cf483a&hm=a02f27cc15d6b8534cb6a59bf8814788b6a62d3bd2ae0a46328be98bae6ccf66&=&format=webp&quality=lossless&width=1117&height=593)
+![App Working Screenshot][working]
 
 ## Deployment
 
@@ -54,3 +61,10 @@ throughout the code with the deployed app URL. Just search http://localhost:5000
 NONE
 
 **Free Software, Hell Yeah!**
+
+[//]: # "These are reference links used in the body of this note and get stripped out when the markdown processor does its job."
+[register]: /public/uploads/Register.png
+[login]: /public/uploads/Login.png
+[chatroom]: /public/uploads/Chat-Room.png
+[logout]: /public/uploads/Logout.png
+[working]: /public/uploads/Working.png
