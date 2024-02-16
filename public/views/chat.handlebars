@@ -14,7 +14,7 @@
   <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
   <script src='../javascript/auth.js'></script>
 
-  <script defer src='http://localhost:5000/socket.io/socket.io.js'></script>
+  <script defer src='{{frontendUrl}}/socket.io/socket.io.js'></script>
   <script defer src='../javascript/chat.js'></script>
   <script defer src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
   <!-- MDB -->
@@ -27,15 +27,21 @@
 <body>
   <div class='chat-container'>
     <div class='chat-header'>
-      <a href='https://chat-app-production-8b7b.up.railway.app/weChat' class='header-anchor'>
+      <a href='{{frontendUrl}}/weChat' class='header-anchor'>
         <div class='image-logo'>
           <img src='uploads/chat-app-icon.png' alt='' class='logo' />
           <h1 class='logo-text'>WeChat</h1>
         </div>
       </a>
-      <div class='header-user'>
-        <h4 class='header-username'>Zain Tanveer</h4>
-        <img src='uploads/zain.jpg' alt='' class='logo' />
+      <div class="dropdown">
+        <div class='header-user' id="header-user">
+          <h4 class='header-username' id="header-username"></h4>
+          <img src='uploads/user-icon.png' alt='' class='logo' id="user-image" />
+        </div>
+
+        <div class="dropdown-content" id="myDropdown">
+          <a href="#" id="logout">Logout</a>
+        </div>
       </div>
 
     </div>
